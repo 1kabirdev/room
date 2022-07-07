@@ -1,10 +1,12 @@
-package com.room
+package com.room.ui
 
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
+import com.room.AdapterUsers
+import com.room.App
 import com.room.dao.DaoRoom
 import com.room.databinding.ActivityMainBinding
 import com.room.model.Users
