@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
-import com.room.AdapterUsers
 import com.room.App
 import com.room.dao.DaoRoom
 import com.room.databinding.ActivityMainBinding
