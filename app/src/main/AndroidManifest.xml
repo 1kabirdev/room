@@ -13,7 +13,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Room">
         <activity
-            android:name=".TasksActivity"
+            android:name=".ui.add_task.AddTaskActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.tasks.TasksActivity"
             android:exported="false" />
         <activity
             android:name=".ui.MainActivity"
