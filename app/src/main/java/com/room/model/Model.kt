@@ -11,6 +11,7 @@ data class Users(
     @ColumnInfo(name = "email") val email: String?,
 )
 
+@Entity(tableName = "tasks")
 data class Tasks(
     @PrimaryKey(autoGenerate = true) val id: Int,
     @ColumnInfo(name = "title") val title: String?,

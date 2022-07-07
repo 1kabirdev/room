@@ -4,51 +4,40 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.AppCompatButton
-import androidx.appcompat.widget.AppCompatEditText
 import androidx.lifecycle.lifecycleScope
-import androidx.recyclerview.widget.RecyclerView
-import com.room.dao.UsersDao
+import com.room.dao.DaoRoom
+import com.room.databinding.ActivityMainBinding
 import com.room.model.Users
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity(), AdapterUsers.OnClickListener {
-    private lateinit var usersDao: UsersDao
 
-    private lateinit var name: AppCompatEditText
-    private lateinit var email: AppCompatEditText
-    private lateinit var save: AppCompatButton
-    private lateinit var clear: AppCompatButton
-    private lateinit var recyclerView: RecyclerView
+    private lateinit var binding: ActivityMainBinding
+    private lateinit var usersDao: DaoRoom
     private lateinit var adapterUsers: AdapterUsers
     private lateinit var userList: ArrayList<Users>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         usersDao = (application as App).getDatabase().usersDao()
-
-        name = findViewById(R.id.name)
-        email = findViewById(R.id.email)
-        save = findViewById(R.id.save)
-        clear = findViewById(R.id.clear)
-        recyclerView = findViewById(R.id.recyclerView)
         userList = ArrayList()
 
-        save.setOnClickListener {
-            saveData(name.text.toString(), email.text.toString())
+        binding.save.setOnClickListener {
+            saveData(
+                binding.name.text.toString(),
+                binding.email.text.toString()
+            )
         }
-        clear.setOnClickListener {
+        binding.clear.setOnClickListener {
             deleteData()
         }
-
         loadData()
         adapterUsers = AdapterUsers(userList, this@MainActivity)
 
     }
-
 
     @SuppressLint("NotifyDataSetChanged")
     private fun saveData(name: String, email: String) {
@@ -63,7 +52,7 @@ class MainActivity : AppCompatActivity(), AdapterUsers.OnClickListener {
         }
 
         adapterUsers.notifyDataSetChanged()
-        recyclerView.adapter = adapterUsers
+        binding.recyclerView.adapter = adapterUsers
     }
 
 
@@ -73,20 +62,20 @@ class MainActivity : AppCompatActivity(), AdapterUsers.OnClickListener {
             usersDao.deleteAll()
         }
         adapterUsers.notifyDataSetChanged()
-        recyclerView.adapter = null
+        binding.recyclerView.adapter = null
         userList.clear()
     }
 
     private fun loadData() {
         lifecycleScope.launch(Dispatchers.IO) {
             userList.addAll(usersDao.getAll())
-            recyclerView.adapter = adapterUsers
+            binding.recyclerView.adapter = adapterUsers
         }
     }
 
     private fun clearEditText() {
-        name.text = null
-        email.text = null
+        binding.name.text = null
+        binding.email.text = null
     }
 
     override fun delete(users: Users) {
