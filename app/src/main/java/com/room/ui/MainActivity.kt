@@ -27,7 +27,11 @@ class MainActivity : AppCompatActivity(), AdapterTasks.OnClickListener {
         tasksDao = (application as App).getDatabase().tasksDao()
 
         onClickListener()
+    }
+
+    override fun onStart() {
         loadData()
+        super.onStart()
     }
 
     private fun loadData() {
@@ -62,18 +66,7 @@ class MainActivity : AppCompatActivity(), AdapterTasks.OnClickListener {
     }
 
     override fun onResume() {
-        lifecycleScope.launch(Dispatchers.Main) {
-            val list = tasksDao.getAllTasks() as ArrayList
-            withContext(Dispatchers.Main) {
-                if (list.size == 0) {
-                    binding.linearNotRecord.visibility = View.VISIBLE
-                } else {
-                    binding.linearNotRecord.visibility = View.GONE
-                    adapterUsers = AdapterTasks(list, this@MainActivity)
-                    binding.recyclerView.adapter = adapterUsers
-                }
-            }
-        }
+        loadData()
         super.onResume()
     }
 }
