@@ -30,11 +30,11 @@ class MainActivity : AppCompatActivity(), AdapterTasks.OnClickListener {
     }
 
     override fun onStart() {
-        loadData()
+        loadTasks()
         super.onStart()
     }
 
-    private fun loadData() {
+    private fun loadTasks() {
         lifecycleScope.launch(Dispatchers.Main) {
             val list = tasksDao.getAllTasks() as ArrayList
             withContext(Dispatchers.Main) {
@@ -66,7 +66,7 @@ class MainActivity : AppCompatActivity(), AdapterTasks.OnClickListener {
     }
 
     override fun onResume() {
-        loadData()
+        loadTasks()
         super.onResume()
     }
 }
