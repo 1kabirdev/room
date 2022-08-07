@@ -16,9 +16,6 @@
             android:name=".ui.add_task.AddTaskActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.tasks.TasksActivity"
-            android:exported="false" />
-        <activity
             android:name=".ui.MainActivity"
             android:exported="true">
             <intent-filter>

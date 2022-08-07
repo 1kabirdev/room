@@ -12,7 +12,7 @@ class App : Application() {
         super.onCreate()
         database = Room.databaseBuilder(
             applicationContext,
-            AppDatabase::class.java, "users_database"
+            AppDatabase::class.java, "tasks_database"
         ).build()
     }
 
