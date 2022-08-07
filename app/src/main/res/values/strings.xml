@@ -2,5 +2,5 @@
     <string name="app_name">Список дел</string>
     <string name="text_save_record">Сохранить запись</string>
     <string name="text_list_me_record">Список моих задач</string>
-    <string name="text_add_new_record">Добавить новоую задачу</string>
+    <string name="text_add_new_record">Добавить новую задачу</string>
 </resources>
